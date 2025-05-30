@@ -17,13 +17,14 @@ class PermisoSeeder extends Seeder
 
         $permisos = [
             "panel",
-            "comensales",
+            "profiles",
             "users",
-            "entradas",
-            "recepcion",
-            "reportes",
-            "sincronizarData",
-            "servicios",
+            "events",
+            "payments",
+            "partisans",
+            "speakers",
+            "reports",
+            "certificates",
         ];
 
         foreach ($permisos as $key => $value) {

@@ -8,7 +8,7 @@ namespace App\Models;
 class DataDev
 {
 
-    public $respuesta = [
+    public static $respuesta = [
         "mensaje" => "No Funcionó",
         "activo" => null,
         "estatus" => 404,

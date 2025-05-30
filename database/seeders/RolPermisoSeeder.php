@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permiso;
+use App\Models\Role;
 use App\Models\RolPermiso;
 use Illuminate\Database\Seeder;
 
@@ -14,39 +16,51 @@ class RolPermisoSeeder extends Seeder
      */
     public function run()
     {
-        $roles = [
-            "administrador" => 2,
-            "cajero" => 3
-        ];
 
-        $permososDeAdminitrador = [
+        $permisosDeOrganizador = [
             "panel",
-            "comensales",
+            "profiles",
             "users",
-            "recepcion",
-            "reportes",
-            "entradas",
-            "sincronizarData",
-            "servicios",
+            "events",
+            "payments",
+            "partisans",
+            "speakers",
+            "reports",
+            "certificates"
+        ];
+        
+        $permisosDeParticipante = [
+            "profiles",
+            "events",
+            "partisans",
+            "certificates"
+        ];
+        
+        $permisosDePonente = [
+            "profiles",
+            "events",
+            "speakers",
+            "certificates"
         ];
 
-        $permososDeCajero = [
-            "recepcion",
-            "reportes",
-            "entradas",
-        ];
-
-        foreach ($permososDeAdminitrador as $key => $value) {
+        foreach ($permisosDeOrganizador as $key => $value) {
             $permiso = new RolPermiso();
-            $permiso->id_rol = $roles['administrador'];
-            $permiso->id_permiso = $value;
+            $permiso->id_rol = Role::where('nombre', 'ORGANIZER')->first()->id;
+            $permiso->id_permiso = Permiso::where('nombre', $value)->first()->id;
             $permiso->save();
         }
-
-        foreach ($permososDeCajero as $key => $value) {
+       
+        foreach ($permisosDeParticipante as $key => $value) {
             $permiso = new RolPermiso();
-            $permiso->id_rol = $roles['cajero'];
-            $permiso->id_permiso = $value;
+            $permiso->id_rol = Role::where('nombre', 'SPEAKER')->first()->id;
+            $permiso->id_permiso = Permiso::where('nombre', $value)->first()->id;
+            $permiso->save();
+        }
+       
+        foreach ($permisosDePonente as $key => $value) {
+            $permiso = new RolPermiso();
+            $permiso->id_rol = Role::where('nombre', 'PARTICIPANT')->first()->id;
+            $permiso->id_permiso = Permiso::where('nombre', $value)->first()->id;
             $permiso->save();
         }
     }

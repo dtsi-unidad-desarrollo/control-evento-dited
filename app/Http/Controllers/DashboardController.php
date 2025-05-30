@@ -31,8 +31,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-     
-        return view('admin.dashboard');
+        $respuesta = DataDev::$respuesta;
+        return view('admin.dashboard', compact('respuesta'));
     }
 
     

@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     UserController,
     DashboardController,
     LoginController,
+    ProfileController,
 };
 
 
@@ -25,13 +26,15 @@ Route::get('/login', [LoginController::class, 'index'])->name('login.index')->mi
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route::resource('/login', LoginController::class)->names('login')->middleware('guest');
 
-
-
+/** Rutas del sistema */
 Route::middleware('auth', 'validarRol')->group(function () {
+
     /** Rutas de controlador usuarios */
     Route::resource('/users', UserController::class)->names('admin.users');
+    
+    /** Rutas de controlador de perfiles */
+    Route::resource('/profiles', ProfileController::class)->names('admin.profiles');
 
     /** Tablero estadistico */
     Route::get('/panel', [DashboardController::class, 'index'])->name('admin.panel.index');

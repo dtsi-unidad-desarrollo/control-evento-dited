@@ -31,7 +31,7 @@ class ValidarRol
                 $path = explode('/',$request->path())[0];
 
                 if( !in_array($path , $permisos) ){
-                    return redirect()->route('admin.recepcion.index')->with([
+                    return redirect()->route('admin.panel.index')->with([
                         "mensaje" => "No tiene autorización para acceder al modulo: ". $path ,
                         "estatus" => Response::HTTP_UNAUTHORIZED
                     ]);

@@ -40,7 +40,7 @@ class LoginController extends Controller
             if(Auth::user()->rol == 1 || Auth::user()->rol == 2 ){
                 return redirect()->route('admin.panel.index');
             }else{
-                return redirect()->route('admin.recepcion.index');
+                return redirect()->route('admin.panel.index');
             }
         }
 
