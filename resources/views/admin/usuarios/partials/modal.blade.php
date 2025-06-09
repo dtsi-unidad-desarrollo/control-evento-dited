@@ -13,7 +13,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            ¿Esta seguro que desea eliminar al usuario <span class="text-danger fs-5">{{$usuario->nombre}}</span>? 
+            ¿Esta seguro que desea eliminar al usuario <span class="text-danger fs-5">{{$usuario->name}}</span>? 
         </div>
         <div class="modal-footer">
             <form action="{{ route('admin.users.destroy', $usuario->id) }}" method="post">

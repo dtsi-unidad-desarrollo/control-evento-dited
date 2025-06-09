@@ -7,9 +7,10 @@
     <div class="container">
 
 
-        @isset($respuesta)
+        @if (session('mensaje'))
             @include('partials.alert')
-        @endisset
+        @endif
+        
         <div id="alert"></div>
 
         <section class="section register d-flex flex-column align-items-center justify-content-center ">
@@ -50,12 +51,12 @@
                                         <div class="input-group has-validation">
                                             <span class="input-group-text text-white bg-primary"
                                                 id="inputGroupPrepend">@</span>
-                                            <input type="text" name="nombre" class="form-control" id="yourUsername"
-                                                placeholder="Ingrese su nombre de usuario" value="{{ old('nombre') ?? '' }}"
+                                            <input type="text" name="name" class="form-control" id="yourUsername"
+                                                placeholder="Ingrese su name de usuario" value="{{ old('name') ?? '' }}"
                                                 required>
                                             <div class="invalid-feedback">Por favor ingrese su nombre de usuario! </div>
                                         </div>
-                                        @error('nombre')
+                                        @error('name')
                                             <div class="text-danger"> {{ $message }} </div>
                                         @enderror
                                     </div>
@@ -103,7 +104,8 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between">
-                                        <a href="{{ route('admin.users.index') }}" class="btn btn-outline-danger">Volver</a>
+                                        <a href="{{ route('admin.users.index') }}"
+                                            class="btn btn-outline-danger">Volver</a>
 
                                         <button class="btn btn-outline-primary" type="submit">Guardar datos</button>
                                     </div>

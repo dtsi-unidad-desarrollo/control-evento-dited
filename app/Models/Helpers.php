@@ -142,7 +142,7 @@ class Helpers extends Model
 
     public static function getUsuarios()
     {
-        $usuarios = User::where('rol', '!=', 1)->get();
+        $usuarios = User::where('rol', '>=', 1)->get();
         foreach ($usuarios as $key => $usuario) {
             $usuarios[$key] = self::getUsuario($usuario->id);
         }

@@ -6,11 +6,8 @@
 @section('content')
     <div class="container">
 
-        @if (session('mensaje'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('mensaje') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+       @if (session('mensaje'))
+            @include('partials.alert')
         @endif
         
 
@@ -53,12 +50,12 @@
                                         <div class="input-group has-validation">
                                             <span class="input-group-text text-white bg-primary"
                                                 id="inputGroupPrepend">@</span>
-                                            <input type="text" name="nombre" class="form-control" id="yourUsername"
+                                            <input type="text" name="name" class="form-control" id="yourUsername"
                                                 placeholder="Ingrese su nombre de usuario"
-                                                value="{{ $usuario->nombre ?? old('nombre') }}" required>
+                                                value="{{ $usuario->nombre ?? old('name') }}" required>
                                             <div class="invalid-feedback">Por favor ingrese su nombre completo! </div>
                                         </div>
-                                        @error('nombre')
+                                        @error('name')
                                             <div class="text-danger"> {{ $message }} </div>
                                         @enderror
                                     </div>

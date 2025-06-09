@@ -36,6 +36,9 @@ Route::middleware('auth', 'validarRol')->group(function () {
     /** Rutas de controlador de perfiles */
     Route::resource('/profiles', ProfileController::class)->names('admin.profiles');
 
+    /** Rutas de controlador de perfiles */
+    Route::resource('/events', ProfileController::class)->names('admin.events');
+
     /** Tablero estadistico */
     Route::get('/panel', [DashboardController::class, 'index'])->name('admin.panel.index');
 

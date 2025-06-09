@@ -19,14 +19,14 @@ class RolPermisoSeeder extends Seeder
 
         $permisosDeOrganizador = [
             "panel",
-            "profiles",
-            "users",
-            "events",
-            "payments",
-            "partisans",
-            "speakers",
-            "reports",
-            "certificates"
+            "profiles", // perfiles
+            "users", // usuario
+            "events", // eventos
+            "payments", // pagos
+            "partisans", //participantes
+            "speakers", // ponentenes
+            "reports", // 
+            "certificates",
         ];
         
         $permisosDeParticipante = [

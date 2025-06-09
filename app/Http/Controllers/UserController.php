@@ -12,22 +12,23 @@ use App\Models\{
     Permiso,
     Role
 };
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public $data;
-
-    public function __construct()
-    {
-        $this->data = new DataDev;
-    }
-    public function index()
+    public function index(Request $request)
     {
         try {
+            return $request->all();
+            return $request->filtro();
+            //  $usuarios = User::where('name', '=', $request->filtro)->paginate(12);
+            //  $usuarios = User::where('name', '=', $request->filtro)
+            // ->orderBy('date', 'Desc');
+            // ->paginate(12);
             $usuarios = Helpers::getUsuarios();
-            $respuesta = $this->data->respuesta;
+            $respuesta = DataDev::$respuesta;
             return view('admin.usuarios.lista', compact('usuarios', 'respuesta'));
         } catch (\Throwable $th) {
             $errorInfo = Helpers::getMensajeError($th, "Error al Consultar datos de usuarios en el metodo index,");
@@ -39,7 +40,8 @@ class UserController extends Controller
     {
         try {
             $roles = Role::where('estatus', 1)->where('nombre', '!=', 'ROOT')->get();
-            return view('admin.usuarios.crear', compact('roles'));
+            $respuesta = DataDev::$respuesta;
+            return view('admin.usuarios.crear', compact('roles', 'respuesta'));
         } catch (\Throwable $th) {
             $errorInfo = Helpers::getMensajeError($th, "Error al Consultar datos de usuarios en el metodo create,");
             return response()->view('errors.404', compact("errorInfo"), 404);
@@ -51,10 +53,9 @@ class UserController extends Controller
     {
         try {
 
-
             // Seteamos la foto
             if (isset($request->file)) {
-                $request['foto'] = Helpers::setFile($request);
+                $request['photo'] = Helpers::setFile($request);
             }
             // Encriptamos la contraseña
             $request['password'] = Hash::make($request['password']);
@@ -65,7 +66,7 @@ class UserController extends Controller
                 : "El usuario no se registro!";
             $estatus = $estatusCreate ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
 
-            return redirect()->route('admin.users.index')->with(compact('mensaje', 'estatus'));
+            return back()->with(compact('mensaje', 'estatus'));
         } catch (\Throwable $th) {
             $errorInfo = Helpers::getMensajeError($th, "Error al Registrar los datos de usuarios en el metodo store,");
             return response()->view('errors.404', compact("errorInfo"), 404);
@@ -77,8 +78,9 @@ class UserController extends Controller
 
         try {
             $usuario = $user;
+            $respuesta = DataDev::$respuesta;
             $roles = Role::where('estatus', 1)->where('nombre', '!=', 'ROOT')->get();
-            return view('admin.usuarios.editar', compact('usuario', 'roles'));
+            return view('admin.usuarios.editar', compact('usuario', 'roles', 'respuesta'));
         } catch (\Throwable $th) {
             $errorInfo = Helpers::getMensajeError($th, "Error de consula,");
             return response()->view('errors.404', compact("errorInfo"), 404);
@@ -105,9 +107,9 @@ class UserController extends Controller
                     Helpers::removeFile($user->foto);
                 }
                 // Insertamos la nueva imagen o archivo
-                $request['foto'] = Helpers::setFile($request);
+                $request['photo'] = Helpers::setFile($request);
             } else {
-                $request['foto'] = $user->foto;
+                $request['photo'] = $user->foto;
             }
             // Encriptamos la contraseña
             if (isset($request['password'])) {
@@ -133,7 +135,7 @@ class UserController extends Controller
             $user->delete();
             $mensaje = "El Usuario se Eliminó correctamente.";
             $estatus = Response::HTTP_OK;
-            return redirect()->route('admin.users.index')->with( compact('mensaje', 'estatus'));
+            return redirect()->route('admin.users.index')->with(compact('mensaje', 'estatus'));
         } catch (\Throwable $th) {
             $errorInfo = Helpers::getMensajeError($th, "Error de al intentar Eliminar un usuario,");
             return response()->view('errors.404', compact("errorInfo"), 404);

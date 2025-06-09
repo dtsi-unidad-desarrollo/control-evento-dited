@@ -82,14 +82,14 @@
                                 <td>
 
                                     {{-- Boton modal de info del estudiante --}}
-                                    {{-- @include('admin.comensales.partials.modaldialog')  --}}
+                                    @include('admin.profiles.partials.modal-show') 
                                     
                                     {{-- Boton editar --}}
-                                    {{-- @include('admin.comensales.partials.modalFormularioEditar')  --}}
+                                    @include('admin.profiles.partials.modal-form-edit') 
                     
 
                                     {{-- Boton eliminar --}}
-                                    {{-- @include('admin.comensales.partials.modal') --}}
+                                    @include('admin.profiles.partials.modal-delete')
                                 </td>
 
                             </tr>
