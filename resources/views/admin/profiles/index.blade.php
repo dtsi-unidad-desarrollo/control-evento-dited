@@ -62,7 +62,7 @@
                             <th scope="col">Apellidos</th>
                             <th scope="col">Cédula</th>
                             <th scope="col">Tipo</th>
-                            <th scope="col">Estatus</th>
+                            <th scope="col">Estatu</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
