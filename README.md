@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **COMESIS**
 ------------------------------
 Es un sistema de control de acceso el cual se encarga de capturar las entradas de los
@@ -25,3 +26,7 @@ Información técnica
 ### Infraestructura
 - Servidor Apache php 8.1^
 - Base de datos Mysql MariaDB
+=======
+# Control-de-eventos
+Modelo eventos
+>>>>>>> 4b4e42f91fdc33d5b9191d9bd90005e240ac3886
